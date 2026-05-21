@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Freelance Pricing Calculator | Calculate Your Hourly Rate | freelancepricingcalc.com"
+  description="Calculate the right hourly or project rate for your freelance work. Enter your expenses, desired income, billable hours, and niche to get a data-backed pricing recommendation."
+>
+  <h1>Freelance Pricing Calculator</h1>
+  <p class="byline">Reviewed by <a href="/editorial">Phoenix Reyes (PR)</a>, Editor-in-Chief — Freelance Pricing &amp; Independent Contractor Lead. Updated May 2026.</p>
+
+  <p>One of the most common mistakes freelancers make is underpricing their work. Setting a rate that feels comfortable often means setting it too low — without accounting for self-employment taxes, unpaid time, gaps between projects, and the cost of running a business. This calculator works backwards from your financial goals and true cost of operating to give you a minimum viable rate and a target market rate.</p>
+
+  <p>This tool is for informational purposes only. Market rates vary significantly by niche, experience, geography, and clientele. Use this as a starting point, not a ceiling.</p>
+
+  <h2>Calculate Your Rate</h2>
+
+  <form id="calc-form">
+    <label for="niche">Primary Freelance Niche</label>
+    <select id="niche" name="niche">
+      <option value="dev">Software Development / Engineering</option>
+      <option value="design">Graphic / UI Design</option>
+      <option value="writing">Copywriting / Content Writing</option>
+      <option value="marketing">Digital Marketing / SEO</option>
+      <option value="consulting">Business Consulting</option>
+      <option value="video">Video Production / Editing</option>
+      <option value="other">Other</option>
+    </select>
+
+    <label for="annual-target">Target Annual Take-Home Income ($)</label>
+    <input type="number" id="annual-target" name="annual-target" placeholder="e.g. 80000" min="0" />
+
+    <label for="business-expenses">Annual Business Expenses ($, software, equipment, insurance, etc.)</label>
+    <input type="number" id="business-expenses" name="business-expenses" placeholder="e.g. 6000" min="0" />
+
+    <label for="weeks-work">Weeks You Plan to Work Per Year</label>
+    <input type="number" id="weeks-work" name="weeks-work" placeholder="e.g. 48" min="1" max="52" />
+
+    <label for="billable-hours">Billable Hours Per Week</label>
+    <input type="number" id="billable-hours" name="billable-hours" placeholder="e.g. 25" min="1" max="60" />
+
+    <label for="experience">Years of Experience</label>
+    <select id="experience" name="experience">
+      <option value="entry">0–2 years (entry level)</option>
+      <option value="mid">3–6 years (mid-level)</option>
+      <option value="senior">7–12 years (senior)</option>
+      <option value="expert">13+ years (expert / specialist)</option>
+    </select>
+
+    <button type="submit">Calculate My Rate</button>
+  </form>
+
+  <div id="result" style="display:none; background:#e8f0fb; border:1px solid #c5d8f8; border-radius:6px; padding:1.25rem; margin-bottom:2rem;">
+    <h3 id="result-title" style="margin-top:0;">Your Recommended Rate</h3>
+    <p id="result-range" style="font-size:1.5rem; font-weight:700; color:#0a66c2;"></p>
+    <p id="result-note" style="font-size:0.9rem; color:#555;"></p>
+  </div>
+
+  <h2>How This Calculator Works</h2>
+  <p>Your minimum viable rate is calculated by working backwards from your financial needs:</p>
+  <ol>
+    <li><strong>Gross revenue needed:</strong> Target income + business expenses + self-employment tax (~15.3% on net profit) + health insurance estimate.</li>
+    <li><strong>Annual billable hours:</strong> Weeks worked × billable hours per week.</li>
+    <li><strong>Minimum hourly rate:</strong> Gross revenue needed ÷ annual billable hours.</li>
+    <li><strong>Market rate adjustment:</strong> Your rate is compared to industry benchmarks for your niche and experience level to arrive at a target market rate.</li>
+  </ol>
+  <p>The target rate includes a buffer above your minimum — because you won't be 100% booked every week, and you deserve to earn more than break-even.</p>
+
+  <h2>Market Rate Benchmarks by Niche (2026)</h2>
+  <ul>
+    <li><strong>Software development:</strong> $75–$250/hr (varies by stack and seniority)</li>
+    <li><strong>Graphic / UI design:</strong> $50–$150/hr</li>
+    <li><strong>Copywriting:</strong> $50–$175/hr (or $0.10–$0.50/word for project work)</li>
+    <li><strong>Digital marketing / SEO:</strong> $50–$150/hr</li>
+    <li><strong>Business consulting:</strong> $100–$400/hr (specialist niches higher)</li>
+    <li><strong>Video production:</strong> $50–$175/hr</li>
+  </ul>
+
+  <h2>Common Pricing Mistakes to Avoid</h2>
+  <ul>
+    <li><strong>Not accounting for self-employment tax:</strong> As a freelancer, you pay both the employee and employer portions — 15.3% on net profit up to the Social Security wage base.</li>
+    <li><strong>Ignoring non-billable time:</strong> Admin, sales, revisions, and client communication typically eat 30–50% of your working hours.</li>
+    <li><strong>Underestimating project scope:</strong> Scope creep is real. Price in a buffer, or charge hourly on variable projects.</li>
+    <li><strong>Matching the lowest market rate:</strong> Competing on price attracts price-sensitive clients. Specialization and quality command higher rates.</li>
+  </ul>
+
+  <h2>Related Guides</h2>
+  <ul>
+    <li><a href="/guides/how-to-set-freelance-rates">How to Set Your Freelance Rates</a></li>
+    <li><a href="/guides/freelance-vs-employee-tax-comparison">Freelance vs. Employee: True Cost Comparison</a></li>
+    <li><a href="/guides/raising-your-freelance-rates">How to Raise Your Freelance Rates Without Losing Clients</a></li>
+    <li><a href="/guides/project-based-vs-hourly-pricing">Project-Based vs. Hourly Pricing: Which Is Better?</a></li>
+  </ul>
+
+  <script>
+    const form = document.getElementById('calc-form');
+    const resultDiv = document.getElementById('result');
+    const resultRange = document.getElementById('result-range');
+    const resultNote = document.getElementById('result-note');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const annualTarget = parseFloat(document.getElementById('annual-target').value) || 0;
+      const bizExpenses = parseFloat(document.getElementById('business-expenses').value) || 0;
+      const weeksWork = parseFloat(document.getElementById('weeks-work').value) || 48;
+      const billableHrs = parseFloat(document.getElementById('billable-hours').value) || 25;
+      const niche = document.getElementById('niche').value;
+      const experience = document.getElementById('experience').value;
+
+      // SE tax rate ~15.3%, health insurance estimate $5,000/yr
+      const seTax = annualTarget * 0.153;
+      const healthIns = 5000;
+      const grossNeeded = annualTarget + bizExpenses + seTax + healthIns;
+
+      const annualBillableHrs = weeksWork * billableHrs;
+      const minRate = annualBillableHrs > 0 ? grossNeeded / annualBillableHrs : 0;
+
+      // Market rate multipliers by niche and experience
+      const nicheBase = { dev: 125, design: 90, writing: 85, marketing: 80, consulting: 175, video: 90, other: 75 };
+      const expMult = { entry: 0.6, mid: 1.0, senior: 1.4, expert: 1.9 };
+      const marketRate = (nicheBase[niche] || 75) * (expMult[experience] || 1.0);
+
+      const targetRate = Math.max(minRate, marketRate * 0.9);
+      const targetHigh = marketRate * 1.1;
+
+      const fmt = (n) => '$' + Math.round(n);
+
+      resultRange.textContent = fmt(Math.max(minRate, targetRate)) + ' – ' + fmt(targetHigh) + ' / hr';
+      resultNote.textContent = 'Your minimum viable rate is ' + fmt(minRate) + '/hr to cover income, taxes, and expenses. Market rate for your niche and experience is approximately ' + fmt(marketRate) + '/hr. Aim for the higher end as you build your portfolio and client base. Annual billable hours: ' + Math.round(annualBillableHrs) + '.';
+      resultDiv.style.display = 'block';
+      resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  </script>
+</BaseLayout>

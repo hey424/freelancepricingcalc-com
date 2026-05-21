@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Freelance Pricing Calculation Methodology | FreelancePricingCalc" description="How FreelancePricingCalc estimates freelance rates — data sources, formulas for target hourly rates, overhead factors, and the self-employment tax adjustment.">
+  <h1>Freelance Pricing Calculation Methodology</h1>
+  <p><em>Reviewed by Phoenix Reyes (PR), Independent Contractor (10+ yrs), Freelance Pricing Lead.</em></p>
+
+  <h2>Overview</h2>
+  <p>FreelancePricingCalc helps independent contractors and freelancers determine a sustainable target rate that covers their true cost of self-employment. Many freelancers underprice their services because they compare their hourly rate to a former employee's hourly wage — ignoring the significant difference in costs and tax burden between employment and self-employment. Our calculator builds rates from the ground up, starting from take-home income goals and working backward to the rate that actually achieves them.</p>
+
+  <h2>Data Sources</h2>
+  <ul>
+    <li><strong>Bureau of Labor Statistics (BLS) Occupational Employment and Wage Statistics:</strong> We reference median and mean wages by occupation as market benchmarks for specific freelance fields.</li>
+    <li><strong>IRS Self-Employment Tax Rules:</strong> Self-employment tax rate (15.3% on the first $160,200 of net self-employment income as of 2024, 2.9% above that) is applied to all rate calculations. The deductible portion (half of SE tax) is factored into the net income calculation.</li>
+    <li><strong>IRS Standard Deduction and Tax Bracket Data:</strong> Updated for the current tax year to calculate approximate federal income tax on self-employment income at various rate and income levels.</li>
+    <li><strong>Freelancer Benchmark Surveys:</strong> We reference published annual surveys from organizations including the Freelancers Union, Bonsai, and Toptal to calibrate market rate benchmarks by specialty and experience level.</li>
+    <li><strong>Benefits Cost Data:</strong> Individual health insurance cost benchmarks from the ACA marketplace and employer contribution data from the BLS Employee Benefits Survey inform the benefits cost component.</li>
+  </ul>
+
+  <h2>The Core Formula: Working Backward from Take-Home Income</h2>
+  <p>Most freelance rate calculators work forward: pick an hourly rate and see what you'd make. We work backward from what you actually need to live on:</p>
+  <pre>Target Rate = (Annual Income Goal + Self-Employment Overhead) ÷ Billable Hours</pre>
+  <p>This approach ensures the rate is grounded in the freelancer's actual financial requirements rather than an arbitrary multiple of a prior salary.</p>
+
+  <h3>Step 1: Annual Income Goal (After Tax)</h3>
+  <p>The user enters their desired annual take-home income — what they want to actually spend and save after all taxes and business expenses. This is the foundation of the calculation.</p>
+
+  <h3>Step 2: Self-Employment Tax Gross-Up</h3>
+  <p>Self-employed individuals pay both the employee and employer portions of Social Security and Medicare taxes — 15.3% of net self-employment income (compared to 7.65% for employees). We gross up the after-tax income target by the combined federal and estimated state tax rate to arrive at required gross revenue.</p>
+
+  <h3>Step 3: Overhead and Benefits Costs</h3>
+  <p>We add the estimated annual cost of self-employment overhead the user identifies: health insurance, retirement contributions, professional liability insurance, software and tools, marketing and website costs, accounting/bookkeeping fees, and a self-employment overhead buffer (typically 15–20% of gross revenue). Users can customize each category or use our BLS and market-rate defaults.</p>
+
+  <h3>Step 4: Billable Hours Denominator</h3>
+  <p>Total annual revenue requirements are divided by realistic billable hours — not calendar hours. We default to 60–75% utilization (1,248–1,560 billable hours per year assuming 2,080 working hours), reflecting the reality that freelancers spend significant non-billable time on business development, administration, and professional development. Users can adjust the utilization rate based on their specific practice.</p>
+
+  <h2>Market Rate Calibration</h2>
+  <p>After calculating the "floor" rate from income and overhead requirements, we compare it to market rates for the user's specialty and experience level using BLS and survey benchmark data. If the floor rate significantly exceeds market rates, we flag the gap. If market rates significantly exceed the floor rate, we indicate potential for premium pricing.</p>
+
+  <h2>Limitations</h2>
+  <ul>
+    <li>Tax calculations are estimates — actual tax liability depends on deductions, credits, and state law. Consult a tax professional.</li>
+    <li>Market rate data reflects national medians; local market conditions can vary significantly</li>
+    <li>Utilization rates vary widely by specialty and business development effectiveness</li>
+    <li>The calculator does not account for project-based pricing dynamics, retainer relationships, or value-based pricing</li>
+  </ul>
+
+  <p><em>Informational only. Not professional advice.</em></p>
+</BaseLayout>
